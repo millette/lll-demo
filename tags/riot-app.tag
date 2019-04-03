@@ -59,11 +59,11 @@
   </div>
 
   <script>
-    // fake it until the API implements logout
+    // fake it until the API implements logout (session cookie)
     logout () {
       // riotism: notice the <raw-html> tag above;
       // without it, html tags are escaped as &gt; and &lt;
-      this.message = `Ciao <b>${this.username}</b>`
+      this.message = 'Ciao <b>' + this.username + '</b>'
       this.username = false
       // riotism: update is called automatically
     }
