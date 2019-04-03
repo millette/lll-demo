@@ -1,15 +1,9 @@
-module.exports = (bundler) => ({
-  after(app, server) {
-    app.get("/script.js", (req, res) => {
-      const js = [...bundler.bundleHashes.keys()].find((s) => s.endsWith(".js"))
-      res.sendFile(js)
-    })
-  },
+module.exports = () => ({
   proxy: {
     "/api/*": {
-      target: "http://localhost:3000",
+      target: "http://localhost:3000/",
       pathRewrite: {
-        "^/api/": "/",
+        "^/api/": "",
       },
     },
   },
