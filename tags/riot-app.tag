@@ -1,61 +1,73 @@
-<app>
+<riot-app>
   <h1 class="title">Allô Monde!</h1>
 
-  <div if="{message}" class="notification is-danger">
+  <div show="{message}" class="notification is-danger">
     <button type="button" class="delete" onclick="{clearMessage}"></button>
-    {message}
+    <raw-html content="{message}" />
   </div>
 
-  <div if="{!username}" class="columns">
+  <div hide="{username}" class="columns">
     <div class="column">
       <h2 class="title is-4">Login</h2>
       <form method="post" action="/api/login" onsubmit="{submit}">
-        <label class="label"
-          >username or email<input
-            class="input"
-            required
-            type="text"
-            name="username"
-        /></label>
-        <label class="label"
-          >password
-          <input class="input" required type="password" name="password"
-        /></label>
+        <label class="label">
+          username or email
+          <input class="input" required type="text" name="username" />
+        </label>
+        <label class="label">
+          password
+          <input class="input" required type="password" name="password" />
+        </label>
         <button class="button is-primary">Login</button>
       </form>
     </div>
     <div class="column">
       <h2 class="title is-4">Register</h2>
       <form method="post" action="/api/register" onsubmit="{submit}">
-        <label class="label"
-          >username <input class="input" required type="text" name="username"
-        /></label>
-        <label class="label"
-          >email <input class="input" type="email" name="email"
-        /></label>
-        <label class="label"
-          >password
-          <input class="input" required type="password" name="password"
-        /></label>
-        <label class="label"
-          >password
+        <label class="label">
+          username
+          <input class="input" required type="text" name="username" />
+        </label>
+        <label class="label">
+          email
+          <input class="input" type="email" name="email" />
+        </label>
+        <label class="label">
+          password
+          <input class="input" required type="password" name="password" />
+        </label>
+        <label class="label">
+          password
           <input
             placeholder="(repeat)"
             class="input"
             required
             type="password"
             name="password2"
-        /></label>
+          />
+        </label>
         <button class="button is-primary">Register</button>
       </form>
     </div>
   </div>
 
-  <div if="{username}">
-    {username}
+  <div show="{username}">
+    <p>Utilisateur: <b>{username}</b></p>
+    <button type="button" class="button is-warning" onclick="{logout}">
+      Logout
+    </button>
   </div>
 
   <script>
+    // fake it until the API implements logout
+    logout () {
+      // riotism: notice the <raw-html> tag above;
+      // without it, html tags are escaped as &gt; and &lt;
+      this.message = `Ciao <b>${this.username}</b>`
+      this.username = false
+      // riotism: update is called automatically
+    }
+
     clearMessage () {
       this.message = false
       // riotism: update is called automatically
@@ -90,4 +102,4 @@
         })
     }
   </script>
-</app>
+</riot-app>

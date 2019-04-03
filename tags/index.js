@@ -1,1 +1,2 @@
-import "./app.tag"
+import "./riot-app.tag"
+import "./raw-html.tag"
