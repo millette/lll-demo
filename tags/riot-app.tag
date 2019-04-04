@@ -1,12 +1,12 @@
 <riot-app>
   <h1 class="title">Allô Monde!</h1>
 
-  <div show="{message}" class="notification is-danger">
+  <div if="{message}" class="notification is-danger">
     <button type="button" class="delete" onclick="{clearMessage}"></button>
     <raw-html content="{message}" />
   </div>
 
-  <div hide="{username}" class="columns">
+  <div if="{!username}" class="columns">
     <div class="column">
       <h2 class="title is-4">Login</h2>
       <form method="post" action="/api/login" onsubmit="{submit}">
@@ -51,7 +51,7 @@
     </div>
   </div>
 
-  <div show="{username}">
+  <div if="{username}">
     <p>Utilisateur: <b>{username}</b></p>
     <button type="button" class="button is-warning" onclick="{logout}">
       Logout
@@ -76,6 +76,9 @@
     // Generic function to submit form with "ajax"
     submit(ev) {
       ev.preventDefault()
+      ev.preventUpdate = true
+      this.update({ message: false })
+      // this.message = 'Checking...'
       // use modern fetch() API (instead of xhr)
       // url is taken from the form action
       fetch(ev.target.action, {
@@ -84,21 +87,27 @@
         // URLSearchParams() transforms it into urlencoded
         body: new URLSearchParams(new FormData(ev.target))
       })
-        // if ok, text() returns the username
-        // otherwise, the error is in json
-        .then((res) => res.ok ? res.text() : res.json())
-        .then((username) => {
-          // username will actually be an error if it's an object
-          // on error, set error message
+        .then((res) => {
+          const ct = res.headers.get("content-type")
+          let m
+          if (!ct) {
+            m = 'text'
+          } else {
+            m = ct.indexOf("application/json") === -1 ? 'text' : 'json'
+          }
+          return Promise.all([res, res[m]()])
+        })
+        .then(([res, username]) => {
           if (typeof username === 'object') throw new Error(username.message)
+          if (res.status >= 500) throw new Error(username)
           // riotism: update username and clear message
           this.update({ username, message: false })
           // clear the form values
           ev.target.reset()
         })
-        .catch((err) => {
+        .catch((message) => {
           // riotism: update error message
-          this.update({ message: err.message })
+          this.update({ message })
         })
     }
   </script>
