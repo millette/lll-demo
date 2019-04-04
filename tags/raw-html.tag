@@ -1,5 +1,7 @@
-<raw>
+<raw-html>
   <span></span>
 
-  this.root.innerHTML = opts.content
-</raw>
+  <script>
+    this.root.innerHTML = opts.content
+  </script>
+</raw-html>
