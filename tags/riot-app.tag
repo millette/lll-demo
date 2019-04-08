@@ -59,13 +59,31 @@
   </div>
 
   <script>
+    this.on('before-mount', (a, b, c) => {
+      if (!document.cookie) return
+      fetch('/api/me')
+        .then((res) => res.json())
+        .then(({ username }) => {
+          this.update({ username })
+        })
+        .catch(console.error)
+    })
+
     // fake it until the API implements logout (session cookie)
     logout () {
-      // riotism: notice the <raw-html> tag above;
-      // without it, html tags are escaped as &gt; and &lt;
-      this.message = 'Ciao <b>' + this.username + '</b>'
-      this.username = false
-      // riotism: update is called automatically
+      fetch('/api/logout', {
+        method: 'POST'
+      })
+        .then((res) => res.json())
+        .then((json) => {
+          this.update({
+            // riotism: notice the <raw-html> tag above;
+            // without it, html tags are escaped as &gt; and &lt;
+            message: 'Ciao <b>' + this.username + '</b>',
+            username: false
+          })
+        })
+        .catch(console.error)
     }
 
     clearMessage () {
@@ -78,6 +96,7 @@
       ev.preventDefault()
       ev.preventUpdate = true
       this.update({ message: false })
+      // this.update({ message: 'Checking...' })
       // this.message = 'Checking...'
       // use modern fetch() API (instead of xhr)
       // url is taken from the form action
