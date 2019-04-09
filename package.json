@@ -60,6 +60,9 @@
     "content": [
       "*.html",
       "tags/*.tag"
+    ],
+    "whitelist": [
+      "is-loading"
     ]
   },
   "sass": {
