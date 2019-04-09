@@ -6,6 +6,12 @@
     <raw-html content="{message}" />
   </div>
 
+  <button
+    if="{!loaded}"
+    type="button"
+    class="is-loading button is-info is-large"
+  />
+
   <div if="{loaded && !username}" class="columns">
     <div class="column">
       <h2 class="title is-4">Login</h2>
