@@ -6,7 +6,7 @@
     <raw-html content="{message}" />
   </div>
 
-  <div if="{!username}" class="columns">
+  <div if="{loaded && !username}" class="columns">
     <div class="column">
       <h2 class="title is-4">Login</h2>
       <form method="post" action="/api/login" onsubmit="{submit}">
@@ -59,14 +59,17 @@
   </div>
 
   <script>
+    this.mixin('getCookie')
+
     this.on('before-mount', (a, b, c) => {
-      if (!document.cookie) return
+      if (!this.getCookie('sessionId')) return this.update({ loaded: true })
       fetch('/api/me')
         .then((res) => res.json())
-        .then(({ username }) => {
-          this.update({ username })
+        .then(({ username }) => this.update({ loaded: true, username }))
+        .catch((e) => {
+          console.error(e)
+          this.update({ message: "Missing backend..." })
         })
-        .catch(console.error)
     })
 
     // fake it until the API implements logout (session cookie)
