@@ -25,7 +25,7 @@
   "devDependencies": {
     "@skt-t1-byungi/parcel-plugin-server": "^0.1.0",
     "gh-pages": "^2.0.1",
-    "husky": "^2.1.0",
+    "husky": "^2.2.0",
     "lint-staged": "^8.1.5",
     "parcel-bundler": "^1.12.3",
     "parcel-plugin-purgecss": "^2.1.2",
