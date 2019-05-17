@@ -58,10 +58,21 @@
   </div>
 
   <div if="{username}">
-    <p>Utilisateur: <b>{username}</b></p>
+    <h2 class="title is-3">{username}</h2>
     <button type="button" class="button is-warning" onclick="{logout}">
       Logout
     </button>
+    <div class="columns">
+      <div class="column">
+        <p>Utilisateur {username}</p>
+      </div>
+      <div class="column">
+        <div each="{characters}" class="box">
+          <p>Titre: {title}</p>
+          <p>Élements: {elements.length}</p>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -129,9 +140,29 @@
           if (typeof username === 'object') throw new Error(username.message)
           if (res.status >= 500) throw new Error(username)
           // riotism: update username and clear message
-          this.update({ username, message: false })
+          // this.update({ username, message: false })
           // clear the form values
           ev.target.reset()
+          return username
+        })
+        .then((username) => {
+          const characters = [
+            {
+              title: "perso #1",
+              elements: [
+                'fee'
+              ]
+            },
+            {
+              title: "perso #2",
+              elements: [
+                'fee',
+                'foo'
+              ]
+            }
+          ]
+          // riotism: update username and clear message
+          this.update({ characters, username, message: false })
         })
         .catch((message) => {
           // riotism: update error message
