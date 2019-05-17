@@ -25,12 +25,12 @@
   "devDependencies": {
     "@skt-t1-byungi/parcel-plugin-server": "^0.1.0",
     "gh-pages": "^2.0.1",
-    "husky": "^2.2.0",
-    "lint-staged": "^8.1.6",
+    "husky": "^2.3.0",
+    "lint-staged": "^8.1.7",
     "parcel-bundler": "^1.12.3",
     "parcel-plugin-purgecss": "^2.1.2",
     "parcel-plugin-tag": "^1.2.0",
-    "prettier": "^1.17.0"
+    "prettier": "^1.17.1"
   },
   "lint-staged": {
     "*.{js,json,md,html,graphql,tag,scss}": [
