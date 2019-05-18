@@ -1,5 +1,5 @@
 <riot-app>
-  <h1 class="title">Allô Monde!</h1>
+  <h1 class="title"><a href="/">Allô Monde!</a></h1>
 
   <div if="{message}" class="notification is-danger">
     <button type="button" class="delete" onclick="{clearMessage}"></button>
