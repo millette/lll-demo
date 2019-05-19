@@ -17,7 +17,7 @@
     "start": "CHOKIDAR_USEPOLLING=yes parcel index.html # workaround https://github.com/parcel-bundler/parcel/issues/1743#issuecomment-441278085"
   },
   "dependencies": {
-    "bulma": "^0.7.4",
+    "bulma": "^0.7.5",
     "lodash-es": "^4.17.11",
     "riot": "^3.13.2",
     "sass": "^1.20.1"
