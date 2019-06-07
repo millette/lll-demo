@@ -20,7 +20,7 @@
     "bulma": "^0.7.5",
     "lodash-es": "^4.17.11",
     "riot": "^3.13.2",
-    "sass": "^1.20.3"
+    "sass": "^1.21.0"
   },
   "devDependencies": {
     "@skt-t1-byungi/parcel-plugin-server": "^0.1.0",
@@ -30,7 +30,7 @@
     "parcel-bundler": "^1.12.3",
     "parcel-plugin-purgecss": "^2.1.2",
     "parcel-plugin-tag": "^1.2.0",
-    "prettier": "^1.17.1"
+    "prettier": "^1.18.2"
   },
   "lint-staged": {
     "*.{js,json,md,html,graphql,tag,scss}": [
