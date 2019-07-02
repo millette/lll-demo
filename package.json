@@ -20,7 +20,7 @@
     "bulma": "^0.7.5",
     "lodash-es": "^4.17.11",
     "riot": "^3.13.2",
-    "sass": "^1.22.1"
+    "sass": "^1.22.2"
   },
   "devDependencies": {
     "@skt-t1-byungi/parcel-plugin-server": "^0.1.0",
