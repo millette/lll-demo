@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "bulma": "^0.7.5",
-    "lodash-es": "^4.17.14",
+    "lodash-es": "^4.17.15",
     "riot": "3.13.2",
     "sass": "^1.22.5"
   },
